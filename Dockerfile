@@ -1,12 +1,6 @@
 # Using official python runtime base image
 FROM python:3.8
 
-# add curl for 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
 # Set the application directory
 WORKDIR /app
 
@@ -18,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Make port 80 available for links and/or publish
-EXPOSE 80
+EXPOSE 5000
 
 # Define our command to be run when launching the container
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile", "-", "--workers", "3", "--keep-alive", "0"]
+CMD ["/bin/bash", "run.sh"]
