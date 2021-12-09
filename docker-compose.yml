@@ -1,0 +1,11 @@
+services:
+  api_gateway:
+    build: ./API-Gateway
+    # use python rather than gunicorn for local dev
+    command: python app.py
+    volumes:
+     - ./api_gateway:/app
+    ports:
+      - "5000:80"
+    networks:
+      - claas_net
