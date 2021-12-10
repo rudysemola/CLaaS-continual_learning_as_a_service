@@ -18,7 +18,7 @@ def hello():
 @app.route("/avalanche", methods=['GET'])
 def api_avalanche():
     avalanche_info = test_avalanche_setup()
-    resp = json.dumps({"avalanche_version": avalanche_info})
+    resp = json.dumps({"avalanche_info": avalanche_info})
     
     return resp
 
@@ -27,10 +27,10 @@ def api_avalanche():
 Functions
 """
 def test_avalanche_setup():
-    print("Avalanche Version:", avalanche.__version__)
+    print("Avalanche Version:", avalanche)
     print("Everything looks fine here :-)")
 
-    return avalanche.__version__
+    return avalanche
 
 
 if __name__ == "__main__":
