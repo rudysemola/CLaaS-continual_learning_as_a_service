@@ -27,7 +27,7 @@ def api_avalanche():
 Functions
 """
 def test_avalanche_setup():
-    print("Avalanche Version:", avalanche)
+    print("Avalanche is here :) ", avalanche)
     print("Everything looks fine here :-)")
 
     return avalanche
