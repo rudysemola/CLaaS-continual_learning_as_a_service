@@ -1,17 +1,16 @@
 # Using official python runtime base image
-FROM python:3.8
+FROM continuumio/miniconda3
 
 # Set the application directory
-WORKDIR /app
-
-# Install our requirements.txt
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
-
-# Copy our code from the current folder to /app inside the container
+WORKDIR /claas
+# Copy our code from the current folder to /claas inside the container
 COPY . .
 
-# Make port 80 available for links and/or publish
+#Setup avalanche in claas (local - CPU only!)
+RUN bash install_environment.sh 
+WORKDIR /claas
+
+# Make port 5000 available for links and/or publish
 EXPOSE 5000
 
 # Define our command to be run when launching the container
