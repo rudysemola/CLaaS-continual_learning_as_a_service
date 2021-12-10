@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 "Simple API to check if all ok with Flask microservices in deploy"
 @app.route("/", methods=['GET'])
-def hello():
+def test_hello():
     resp = json.dumps({'dataset': 'D1', 'tr_setup': 'set1', 'results': 1})
     
     return resp
@@ -27,10 +27,10 @@ def api_avalanche():
 Functions
 """
 def test_avalanche_setup():
-    print("Avalanche is here :) ", avalanche)
+    print("Avalanche version ", avalanche.__version__)
     print("Everything looks fine here :-)")
 
-    return avalanche
+    return avalanche.__version__
 
 
 if __name__ == "__main__":

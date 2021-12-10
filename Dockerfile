@@ -6,7 +6,7 @@ WORKDIR /claas
 # Copy our code from the current folder to /claas inside the container
 COPY . .
 
-#Setup avalanche in claas (local - CPU only!)
+#Setup avalanche and app dep (local - CPU only!)
 RUN bash install_environment.sh 
 WORKDIR /claas
 

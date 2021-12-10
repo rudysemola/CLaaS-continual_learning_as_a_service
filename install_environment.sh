@@ -1,16 +1,5 @@
 #!/bin/bash
 
-################################################################################
-# Copyright (c) 2021 ContinualAI.                                              #
-# Copyrights licensed under the MIT License.                                   #
-# See the accompanying LICENSE file for terms.                                 #
-#                                                                              #
-# Date: 09-02-2021                                                             #
-# Author(s): Gabriele Graffieti                                                #
-# E-mail: contact@continualai.org                                              #
-# Website: avalanche.continualai.org                                           #
-################################################################################
-
 python="3.8"
 cuda_version="none"
 help=false
@@ -19,6 +8,7 @@ help=false
 git clone https://github.com/ContinualAI/avalanche.git
 cd avalanche
 
+#
 while test $# -gt 0; do
          case "$1" in
               --python)
@@ -42,6 +32,7 @@ while test $# -gt 0; do
         esac
 done
 
+#
 if [ "$help" = true ] ; then
     echo 'Usage: bash -i ./install_environment.sh [OPTION]...'
     echo 'Install the avalanche environment using conda'
@@ -58,6 +49,7 @@ if [ "$help" = true ] ; then
     exit 0
 fi
 
+# echo 
 echo "python version : $python";
 echo "cuda version : $cuda_version";
 
@@ -93,5 +85,5 @@ conda env update --file environment.yml
 
 # return in root folder
 cd ..
-# Install our app claas requirements.txt
-conda install --file requirements.txt
+# Install our app claas dep (Flask)
+conda install -n avalanche-env -c anaconda flask 
