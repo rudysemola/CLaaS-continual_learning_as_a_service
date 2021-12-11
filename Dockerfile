@@ -1,10 +1,18 @@
-#syntax=docker/dockerfile:1
+# Using avalanche base image
+FROM avalanche-claas:base-skeleton-v1 
 
-FROM continualai/avalanche-test-3.9:latest
+# Set the application directory
+WORKDIR /claas
+# Copy our code from the current folder to /claas inside the container
+COPY . .
 
-WORKDIR ~
-
+# Install CLaas dep using pip in conda
 RUN echo "conda activate avalanche-env" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
+RUN pip install -r requirements.txt
 
-RUN pip install git+https://github.com/ContinualAI/avalanche.git
+
+# Make port 5000 available for links and/or publish
+EXPOSE 5000
+
+#TODO: here!

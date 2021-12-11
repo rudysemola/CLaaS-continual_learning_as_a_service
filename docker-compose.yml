@@ -1,0 +1,16 @@
+services:
+  claas:
+    build: .
+    command: python app.py
+    volumes:
+     - .:/claas
+    ports:
+      - "5000:5000"
+    networks:
+      - claas_avl_net
+
+#volumes:
+#  here_volume_please:
+
+networks:
+  claas_avl_net:
