@@ -16,7 +16,7 @@ def test_hello():
 
 "This is a simple API to test if avalanche is installed correctly."
 @app.route("/avalanche", methods=['GET'])
-def api_avalanche():
+def test_api_avalanche():
     avalanche_info = test_avalanche_setup()
     resp = json.dumps({"avalanche_info": avalanche_info})
     
