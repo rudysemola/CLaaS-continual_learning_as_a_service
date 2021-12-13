@@ -1,18 +1,18 @@
-# Using official python runtime base image
-FROM python:3.8
+# Using avalanche base image
+FROM avalanche-claas:base-skeleton-v1 
 
 # Set the application directory
-WORKDIR /app
-
-# Install our requirements.txt
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
-
-# Copy our code from the current folder to /app inside the container
+WORKDIR /claas
+# Copy our code from the current folder to /claas inside the container
 COPY . .
 
-# Make port 80 available for links and/or publish
-EXPOSE 5000
+# Install CLaas dep using pip in conda
+RUN echo "conda activate avalanche-env" >> ~/.bashrc
+SHELL ["/bin/bash", "--login", "-c"]
+RUN pip install -r requirements.txt
 
-# Define our command to be run when launching the container
-CMD ["/bin/bash", "run.sh"]
+# Make port 80 available for links and/or publish
+EXPOSE 80
+
+# Define command to be run when launching the container
+CMD /bin/bash run.sh
