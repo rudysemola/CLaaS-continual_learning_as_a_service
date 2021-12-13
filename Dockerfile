@@ -1,5 +1,5 @@
 # Using avalanche base image
-FROM avalanche-claas:base-skeleton-v1 
+FROM rudysemoladocker/avalanche-img:base-v1
 
 # Set the application directory
 WORKDIR /claas
