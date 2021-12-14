@@ -1,9 +1,12 @@
 # CLaaS Flask skeleton script
 #
+set -e
 
 # export the variables for flask
 export FLASK_ENV=development
-export FLASK_APP=app
+export FLASK_DEBUG=1
+export FLASK_APP=claas
 
 # run
-python app.py
+#python app.py
+flask run
