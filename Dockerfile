@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 RUN pip install -r requirements.txt
 
 # Make port 80 available for links and/or publish
-EXPOSE 80
+EXPOSE 88
 
 # Define command to be run when launching the container
 CMD /bin/bash run.sh

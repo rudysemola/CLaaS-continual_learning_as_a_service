@@ -4,7 +4,7 @@ services:
     volumes:
      - .:/claas
     ports:
-      - "80:80"
+      - "88:88"
     networks:
       - claas_avl_net
 
