@@ -11,8 +11,8 @@ RUN echo "conda activate avalanche-env" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 RUN pip install -r requirements.txt
 
-# Make port 80 available for links and/or publish
-EXPOSE 88
+# Make port  available for links and/or publish
+EXPOSE 5001
 
 # Define command to be run when launching the container
 CMD /bin/bash run.sh
