@@ -14,16 +14,16 @@ API
 @scenario_v1.route("/avalanche/scenario-v1/<username>", methods=['GET','POST'])
 def setup_experiment(username):
     if request.method == 'POST':
-        resp = json.dumps({'status': 'setup-done', 'num_exp': '3'})
+        resp = jsonify({'status': 'setup-done', 'num_exp': '3'})
     elif request.method == 'GET':
-        resp = json.dumps({'model': 'modelX', 'resutls': 'res'})
+        resp = jsonify({'model': 'modelX', 'resutls': 'res'})
     
     return resp
 
 
-@scenario_v1.route("/avalanche/scenario-v1/<username>/status", methods=['POST'])
-def execute_experiment(username):
-    resp = json.dumps({'status': 'run experiment', 'num_exp': '3'})
+@scenario_v1.route("/avalanche/scenario-v1/<username>/<status>", methods=['POST'])
+def execute_experiment(username, status):
+    resp = jsonify({'status': 'run experiment', 'num_exp': '3'})
     
     return resp
 
