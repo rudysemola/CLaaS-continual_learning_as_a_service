@@ -1,7 +1,7 @@
 from flakon import JsonBlueprint
 from flask import abort, jsonify, request
 
-from class.classes.experiment_base_scenario import ExperimentBaseScenario
+from claas.classes.experiment_base_scenario import ExperimentBaseScenario
 
 #TODO: import avalanche modules
 
@@ -22,7 +22,7 @@ def setup_experiment(username):
 
 #TODO: complete the API
 @base_scenario.route("/base-scenario/<username>/exec", methods=['POST'])
-def setup_experiment(username):
+def execute_experiment(username):
     if request.method == 'POST':
         resp = jsonify({'status': 'CL-Training-execution'})
     
@@ -31,7 +31,7 @@ def setup_experiment(username):
 
 #TODO: complete the API
 @base_scenario.route("/base-scenario/<username>/results", methods=['GET'])
-def execute_experiment(username, status):
+def get_experiment_resutls_model(username):
     resp = jsonify({'results': {}, 'model': 'Pytorch-format'})
     
     return resp
