@@ -11,9 +11,12 @@ scenario_v1 = JsonBlueprint('scenario_v1', __name__)
 """
 API
 """
-@scenario_v1.route("/avalanche/scenario-v1/<username>", methods=['POST'])
+@scenario_v1.route("/avalanche/scenario-v1/<username>", methods=['GET','POST'])
 def setup_experiment(username):
-    resp = json.dumps({'status': 'setup-done', 'num_exp': '3'})
+    if request.method == 'POST':
+        resp = json.dumps({'status': 'setup-done', 'num_exp': '3'})
+    elif request.method == 'GET':
+        resp = json.dumps({'model': 'modelX', 'resutls': 'res'})
     
     return resp
 
@@ -21,13 +24,6 @@ def setup_experiment(username):
 @scenario_v1.route("/avalanche/scenario-v1/<username>/status", methods=['POST'])
 def execute_experiment(username):
     resp = json.dumps({'status': 'run experiment', 'num_exp': '3'})
-    
-    return resp
-
-
-@scenario_v1.route("/avalanche/scenario-v1/<username>", methods=['GET'])
-def get_model_resutls(username):
-    resp = json.dumps({'model': 'modelX', 'resutls': 'res'})
     
     return resp
 
