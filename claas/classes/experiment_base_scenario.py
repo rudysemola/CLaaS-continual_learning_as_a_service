@@ -10,7 +10,7 @@ class ExperimentBaseScenario:
             :param ...
         """
         self.dataset =  []
-        self.num_tot_exps = 0
+        self.num_tot_exps = 0 #0->3 | 4 | 5
         self.model = None #
         self.monitoring_logger = None
         self.metrics = []
@@ -19,5 +19,17 @@ class ExperimentBaseScenario:
         self.results = {} #
         self.status_exp = None
     
-    
-    #TODO: write all methods needed
+
+    #TODO: set the class param 
+    def set_experiment(self):
+        pass
+
+
+    #TODO: run the experiment
+    def run_experiment(self):
+        pass
+
+
+    #TODO: retrive the results of experiment and model like pytorch format
+    def get_resutls_model(self):
+        pass

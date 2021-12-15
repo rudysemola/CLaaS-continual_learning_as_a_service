@@ -12,6 +12,7 @@ base_scenario = JsonBlueprint('base_scenario', __name__)
 API - CLaaS (Base Scenario)
 """
 #TODO: complete the API
+#manage status order ready_setup
 @base_scenario.route("/base-scenario/<username>/setup", methods=['POST'])
 def setup_experiment(username):
     if request.method == 'POST':
@@ -20,7 +21,9 @@ def setup_experiment(username):
     return resp
 
 
-#TODO: complete the API
+#TODO: complete the API 
+#manage here the status order setup_done
+#Not wait the end of CL tr (rapid answer)
 @base_scenario.route("/base-scenario/<username>/exec", methods=['POST'])
 def execute_experiment(username):
     if request.method == 'POST':
@@ -30,18 +33,13 @@ def execute_experiment(username):
 
 
 #TODO: complete the API
+#return: msg if not CL tr end or it is in different status | results and model -> execution | ready_setup
 @base_scenario.route("/base-scenario/<username>/results", methods=['GET'])
 def get_experiment_resutls_model(username):
     resp = jsonify({'results': {}, 'model': 'Pytorch-format'})
     
     return resp
 
-
-
-"""
-Utility function/Class  below
-"""
-#TODO: if needed
 
 """
 # Json like request...
