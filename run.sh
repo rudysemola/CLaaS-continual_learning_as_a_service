@@ -9,4 +9,4 @@ export FLASK_APP=claas
 
 # run
 #python app.py
-flask run
+flask run --host=0.0.0.0 --port=5001
