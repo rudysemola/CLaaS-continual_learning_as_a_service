@@ -51,7 +51,7 @@ def get_experiment_resutls_model(username, exp_name):
     global EXPERIMENT
     if EXPERIMENT.status_exp == "CLtr_done":
         resp = jsonify(
-            {'model': dict(EXPERIMENT.model.state_dict()),
+            {'model-save-PATH': EXPERIMENT.save_model(username, exp_name),
             'results-1': EXPERIMENT.results1, 
             'results-2': EXPERIMENT.results2,
             'status': EXPERIMENT.status_exp

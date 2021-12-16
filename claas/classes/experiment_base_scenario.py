@@ -88,3 +88,10 @@ class ExperimentBaseScenario:
             self.status_exp = 'CLtr_done'
         else: #None
             self.status_exp = 'END scenario DEMO'
+
+    
+    def save_model(self, username, exp_name):
+        torch.save(self.model, 'claas/store_models/'+str(username)+'_'+str(exp_name)+'_simpleModel.pt')
+        model_path = 'claas/store_models/'+str(username)+'_'+str(exp_name)+'_simpleModel.pt'
+        
+        return model_path
