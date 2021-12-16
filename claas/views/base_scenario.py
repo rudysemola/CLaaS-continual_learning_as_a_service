@@ -55,7 +55,6 @@ def get_experiment_resutls_model(username, exp_name):
             'results-2': EXPERIMENT.results2,
             'status': EXPERIMENT.status_exp
             })
-        #resp = jsonify({'results-1': EXPERIMENT.results1, 'results-2': EXPERIMENT.results2, 'status': EXPERIMENT.status_exp})
     else:
         resp = jsonify({'msg': 'Can not retieve the results and model! See The Status of the exsperiment', 'status': EXPERIMENT.status_exp}) 
     
