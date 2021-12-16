@@ -7,6 +7,7 @@ from avalanche.evaluation.metrics import accuracy_metrics, \
     timing_metrics, cpu_usage_metrics, disk_usage_metrics, gpu_usage_metrics, ram_usage_metrics
 from avalanche.training.strategies import Replay
 
+import torch
 from torch.optim import SGD
 from torch.nn import CrossEntropyLoss
 
@@ -93,5 +94,5 @@ class ExperimentBaseScenario:
     def save_model(self, username, exp_name):
         torch.save(self.model, 'claas/store_models/'+str(username)+'_'+str(exp_name)+'_simpleModel.pt')
         model_path = 'claas/store_models/'+str(username)+'_'+str(exp_name)+'_simpleModel.pt'
-        
+
         return model_path

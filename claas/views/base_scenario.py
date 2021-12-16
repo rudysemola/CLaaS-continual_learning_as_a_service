@@ -3,7 +3,6 @@ from flask import abort, jsonify, request
 
 from claas.classes.experiment_base_scenario import ExperimentBaseScenario
 
-import torch
 
 base_scenario = JsonBlueprint('base_scenario', __name__)
 
