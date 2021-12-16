@@ -27,7 +27,7 @@ def setup_experiment():
             'username': EXPERIMENT.username,
             'exp_name' : EXPERIMENT.exp_name            })
     else:
-        resp = jsonify({'msg': 'Can not setup the experiment!'}) 
+        resp = jsonify({'msg': 'Can not setup the experiment! See The Status of the exsperiment', 'status': EXPERIMENT.status_exp}) 
     
     return resp
 
@@ -48,13 +48,17 @@ def execute_experiment(username, exp_name):
 #return: msg if not CL tr end or it is in different status | results and model -> execution | ready_setup
 @base_scenario.route("/base-scenario/<username>/results/<exp_name>", methods=['GET'])
 def get_experiment_resutls_model(username, exp_name):
-    resp = jsonify({'results': {}, 'model': 'Pytorch-format'})
+    global EXPERIMENT
+    if EXPERIMENT.status_exp == "CLtr_done":
+        resp = jsonify({'model': EXPERIMENT.model, 'results': EXPERIMENT.results,'status': EXPERIMENT.status_exp})
+    else:
+        resp = jsonify({'msg': 'Can not retieve the results and model! See The Status of the exsperiment', 'status': EXPERIMENT.status_exp}) 
     
     return resp
 
 
 """
-# Json like request...
+# Json like request
 {
     "username": "MarioRossi",
     "exp_name": "BaseUserExperiment",

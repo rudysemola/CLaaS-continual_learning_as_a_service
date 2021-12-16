@@ -88,8 +88,3 @@ class ExperimentBaseScenario:
             self.status_exp = 'CLtr_done'
         else: #None
             self.status_exp = 'END scenario DEMO'
-
-
-    #TODO: retrive the results of experiment and model like pytorch format
-    def get_resutls_model(self):
-        pass
