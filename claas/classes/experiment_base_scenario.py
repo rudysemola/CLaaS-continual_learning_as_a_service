@@ -62,7 +62,6 @@ class ExperimentBaseScenario:
         self.status_exp = 'ready_to_CLtrain'
 
 
-    #TODO: run the experiment
     def run_experiment(self):
         # CREATE THE STRATEGY INSTANCE (Replay)
         cl_strategy = Replay(
