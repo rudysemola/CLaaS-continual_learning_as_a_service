@@ -19,8 +19,7 @@ class ExperimentBaseScenario:
             TODO: refactoring of the param
             :param ...
         """
-        self.datasets_first_exp =  []
-        self.datasets_second_exp =  []
+        self.benchmark = None
         self.first_done = False #change after first TR
 
         self.model = None #
@@ -34,20 +33,10 @@ class ExperimentBaseScenario:
 
     def set_experiment(self, username, exp_name):
         # Datasets available for current experiment
-        scenario = SplitMNIST(n_experiences=5, shuffle=False)
-        i = 0
-        for experience in scenario.train_stream:
-            if i <3:
-                self.datasets_first_exp.append(experience)
-                i += 1
-            else:
-                self.datasets_second_exp.append(experience)
-                i += 1
-        print(len(self.datasets_first_exp))
-        print(len(self.datasets_second_exp))
-        print(i)
+        self.benchmark = SplitMNIST(n_experiences=5, shuffle=False)
+
         # model
-        self.model = SimpleMLP(num_classes=scenario.n_classes)
+        self.model = SimpleMLP(num_classes=self.benchmark.n_classes)
 
         #metrics, logger and eval plugin
         self.monitoring_logger = InteractiveLogger()
@@ -70,7 +59,17 @@ class ExperimentBaseScenario:
 
     #TODO: run the experiment
     def run_experiment(self):
-        pass
+        # CREATE THE STRATEGY INSTANCE (Replay)
+        cl_strategy = Replay(
+            model, SGD(model.parameters(), lr=0.001, momentum=0.9),
+            CrossEntropyLoss(), train_mb_size=500, train_epochs=1, eval_mb_size=100,
+            evaluator=self.eval_plugin)
+
+        # TRAINING LOOP
+        print('Starting experiment...')
+        #if self.first_done is False:
+
+        #return #TODO 
 
 
     #TODO: retrive the results of experiment and model like pytorch format

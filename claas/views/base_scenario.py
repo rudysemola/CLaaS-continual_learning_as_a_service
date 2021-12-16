@@ -25,8 +25,7 @@ def setup_experiment():
         resp = jsonify({
             'status': EXPERIMENT.status_exp, 
             'username': EXPERIMENT.username,
-            'exp_name' : EXPERIMENT.exp_name
-            })
+            'exp_name' : EXPERIMENT.exp_name            })
     else:
         resp = jsonify({'msg': 'Can not setup the experiment!'}) 
     
