@@ -3,20 +3,30 @@ from flask import abort, jsonify, request
 
 from claas.classes.experiment_base_scenario import ExperimentBaseScenario
 
-#TODO: import avalanche modules
-
 base_scenario = JsonBlueprint('base_scenario', __name__)
+
+"""
+GLOBAL VAR
+"""
+EXPERIMENT = ExperimentBaseScenario()
 
 
 """
 API - CLaaS (Base Scenario)
 """
-#TODO: complete the API
-#manage status order ready_setup
-@base_scenario.route("/base-scenario/<username>/setup", methods=['POST'])
-def setup_experiment(username):
+@base_scenario.route("/base-scenario/<username>/setup/<exp_name>", methods=['POST'])
+def setup_experiment(username, exp_name):
+    global EXPERIMENT
     if request.method == 'POST':
-        resp = jsonify({'status': 'setup-done', 'num_tot_exps': '3'})
+        if EXPERIMENT.status_exp == "ready_to_setup" or EXPERIMENT.status_exp == "setup_done":
+        EXPERIMENT.set_experiment(username, exp_name)
+        resp = jsonify({
+            'status': EXPERIMENT.status_exp, 
+            'username': EXPERIMENT.username,
+            'exp_name' : EXPERIMENT.exp_name
+            })
+        else:
+            resp = jsonify({'msg': 'Can not setup the experiment!'}) 
     
     return resp
 
@@ -24,8 +34,8 @@ def setup_experiment(username):
 #TODO: complete the API 
 #manage here the status order setup_done
 #Not wait the end of CL tr (rapid answer)
-@base_scenario.route("/base-scenario/<username>/exec", methods=['POST'])
-def execute_experiment(username):
+@base_scenario.route("/base-scenario/<username>/exec/<exp_name>", methods=['POST'])
+def execute_experiment(username, exp_name):
     if request.method == 'POST':
         resp = jsonify({'status': 'CL-Training-execution'})
     
@@ -34,8 +44,8 @@ def execute_experiment(username):
 
 #TODO: complete the API
 #return: msg if not CL tr end or it is in different status | results and model -> execution | ready_setup
-@base_scenario.route("/base-scenario/<username>/results", methods=['GET'])
-def get_experiment_resutls_model(username):
+@base_scenario.route("/base-scenario/<username>/results/<exp_name>", methods=['GET'])
+def get_experiment_resutls_model(username, exp_name):
     resp = jsonify({'results': {}, 'model': 'Pytorch-format'})
     
     return resp
@@ -44,19 +54,8 @@ def get_experiment_resutls_model(username):
 """
 # Json like request...
 {
-  "dataset": "MNIST",
-  "scenario": "SplitMNIST",
-  "num_tot_exps": 3,
-  "model": "replay",
-  "monitoring_logger": "interactive",
-  "metrics": [
-    "accuracy_metrics", 
-    "cpu_usage", 
-    "disk_usage",
-    "gpu_usage",
-    "ram_usage",
-    "timing"],
-    "user-options": "P",
-    "username": "Mario Rossi"
+    "username": "MarioRossi",
+    "exp_name": "BaseUserExperiment",
+    "config" : "others"
 }
 """
