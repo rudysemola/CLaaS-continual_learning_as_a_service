@@ -31,7 +31,8 @@ class ExperimentBaseScenario:
         self.username = ''
         self.exp_name = ''
         self.monitoring_logger = None
-        self.results = {} #
+        self.results1 = {} #
+        self.results2 = {} #
         self.status_exp = 'ready_to_setup'
     
 
@@ -76,14 +77,14 @@ class ExperimentBaseScenario:
                 if i >= 3:
                     break
                 cl_strategy.train(exp, num_workers=4)
-                self.results = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
+                self.results1 = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
             self.first_done = True
             self.status_exp = 'CLtr_done'
         elif self.first_done is True:
             for i, exp in enumerate(self.benchmark.train_stream):
                 if i >= 3:
                     cl_strategy.train(exp, num_workers=4)
-                    self.results = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
+                    self.results2 = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
             self.first_done = None
             self.status_exp = 'CLtr_done'
         else: #None

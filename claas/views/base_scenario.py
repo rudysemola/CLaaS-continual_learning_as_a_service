@@ -48,7 +48,8 @@ def execute_experiment(username, exp_name):
 def get_experiment_resutls_model(username, exp_name):
     global EXPERIMENT
     if EXPERIMENT.status_exp == "CLtr_done":
-        resp = jsonify({'model': EXPERIMENT.model.state_dict(), 'results': EXPERIMENT.results,'status': EXPERIMENT.status_exp})
+        #resp = jsonify({'model': EXPERIMENT.model.state_dict(),'results-1': EXPERIMENT.results1, 'results-2': EXPERIMENT.results2,'status': EXPERIMENT.status_exp})
+        resp = jsonify({'results-1': EXPERIMENT.results1, 'results-2': EXPERIMENT.results2, 'status': EXPERIMENT.status_exp})
     else:
         resp = jsonify({'msg': 'Can not retieve the results and model! See The Status of the exsperiment', 'status': EXPERIMENT.status_exp}) 
     
