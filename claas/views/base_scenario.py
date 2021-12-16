@@ -20,7 +20,7 @@ def setup_experiment():
     body_json = request.get_json()
     username = body_json["username"]
     exp_name = body_json["exp_name"]
-    if EXPERIMENT.status_exp == "ready_to_setup" or EXPERIMENT.status_exp == "setup_done":
+    if EXPERIMENT.status_exp == "ready_to_setup" or EXPERIMENT.status_exp == "ready_to_CLtrain":
         EXPERIMENT.set_experiment(username, exp_name)
         resp = jsonify({
             'status': EXPERIMENT.status_exp, 
@@ -32,13 +32,13 @@ def setup_experiment():
     return resp
 
 
-#TODO: complete the API 
-#manage here the status order setup_done
-#Not wait the end of CL tr (rapid answer)
 @base_scenario.route("/base-scenario/<username>/exec/<exp_name>", methods=['POST'])
 def execute_experiment(username, exp_name):
-    if request.method == 'POST':
-        resp = jsonify({'status': 'CL-Training-execution'})
+    if EXPERIMENT.status_exp == "ready_to_CLtrain" or EXPERIMENT.status_exp == "CLtr_done":
+        EXPERIMENT.run_experiment()
+        resp = jsonify({'status': EXPERIMENT.status_exp})
+    else:
+        resp = jsonify({'msg': 'Can not run the experiment!'}) 
     
     return resp
 

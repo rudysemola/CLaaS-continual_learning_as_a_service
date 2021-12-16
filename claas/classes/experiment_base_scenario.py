@@ -54,7 +54,7 @@ class ExperimentBaseScenario:
         self.exp_name = exp_name
 
         # change the experiment status
-        self.status_exp = 'setup_done'
+        self.status_exp = 'ready_to_CLtrain'
 
 
     #TODO: run the experiment
@@ -67,9 +67,23 @@ class ExperimentBaseScenario:
 
         # TRAINING LOOP
         print('Starting experiment...')
-        #if self.first_done is False:
-
-        #return #TODO 
+        if self.first_done is False:
+            for i, exp in enumerate(self.benchmark.train_stream):
+                if i >= 3:
+                    break
+                cl_strategy.train(exp, num_workers=4)
+                self.results = cl_strategy.eval(benchmark.test_stream[:i + 1], num_workers=4)
+            self.first_done = True
+            self.status_exp = 'CLtr_done'
+        elif self.first_done is True:
+            for i, exp in enumerate(self.benchmark.train_stream):
+                if i >= 3:
+                    cl_strategy.train(exp, num_workers=4)
+                    self.results = cl_strategy.eval(benchmark.test_stream[:i + 1], num_workers=4)
+            self.first_done = None
+            self.status_exp = 'CLtr_done'
+        else: #None
+            self.status_exp = 'END scenario DEMO'
 
 
     #TODO: retrive the results of experiment and model like pytorch format
