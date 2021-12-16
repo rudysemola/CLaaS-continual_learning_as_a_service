@@ -14,19 +14,21 @@ EXPERIMENT = ExperimentBaseScenario()
 """
 API - CLaaS (Base Scenario)
 """
-@base_scenario.route("/base-scenario/<username>/setup/<exp_name>", methods=['POST'])
-def setup_experiment(username, exp_name):
+@base_scenario.route("/base-scenario/setup/", methods=['POST'])
+def setup_experiment():
     global EXPERIMENT
-    if request.method == 'POST':
-        if EXPERIMENT.status_exp == "ready_to_setup" or EXPERIMENT.status_exp == "setup_done":
+    body_json = request.get_json()
+    username = body_json["username"]
+    exp_name = body_json["exp_name"]
+    if EXPERIMENT.status_exp == "ready_to_setup" or EXPERIMENT.status_exp == "setup_done":
         EXPERIMENT.set_experiment(username, exp_name)
         resp = jsonify({
             'status': EXPERIMENT.status_exp, 
             'username': EXPERIMENT.username,
             'exp_name' : EXPERIMENT.exp_name
             })
-        else:
-            resp = jsonify({'msg': 'Can not setup the experiment!'}) 
+    else:
+        resp = jsonify({'msg': 'Can not setup the experiment!'}) 
     
     return resp
 
