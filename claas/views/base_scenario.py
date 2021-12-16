@@ -34,11 +34,12 @@ def setup_experiment():
 
 @base_scenario.route("/base-scenario/<username>/exec/<exp_name>", methods=['POST'])
 def execute_experiment(username, exp_name):
+    global EXPERIMENT
     if EXPERIMENT.status_exp == "ready_to_CLtrain" or EXPERIMENT.status_exp == "CLtr_done":
         EXPERIMENT.run_experiment()
         resp = jsonify({'status': EXPERIMENT.status_exp})
     else:
-        resp = jsonify({'msg': 'Can not run the experiment!'}) 
+        resp = jsonify({'msg': 'Can not run the experiment! See The Status of the exsperiment', 'status': EXPERIMENT.status_exp}) 
     
     return resp
 

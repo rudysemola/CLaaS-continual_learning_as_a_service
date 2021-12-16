@@ -5,6 +5,10 @@ from avalanche.training.plugins import EvaluationPlugin
 from avalanche.logging import InteractiveLogger
 from avalanche.evaluation.metrics import accuracy_metrics, \
     timing_metrics, cpu_usage_metrics, disk_usage_metrics, gpu_usage_metrics, ram_usage_metrics
+from avalanche.training.strategies import Replay
+
+from torch.optim import SGD
+from torch.nn import CrossEntropyLoss
 
 
 
@@ -61,7 +65,7 @@ class ExperimentBaseScenario:
     def run_experiment(self):
         # CREATE THE STRATEGY INSTANCE (Replay)
         cl_strategy = Replay(
-            model, SGD(model.parameters(), lr=0.001, momentum=0.9),
+            self.model, SGD(self.model.parameters(), lr=0.001, momentum=0.9),
             CrossEntropyLoss(), train_mb_size=500, train_epochs=1, eval_mb_size=100,
             evaluator=self.eval_plugin)
 
@@ -72,14 +76,14 @@ class ExperimentBaseScenario:
                 if i >= 3:
                     break
                 cl_strategy.train(exp, num_workers=4)
-                self.results = cl_strategy.eval(benchmark.test_stream[:i + 1], num_workers=4)
+                self.results = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
             self.first_done = True
             self.status_exp = 'CLtr_done'
         elif self.first_done is True:
             for i, exp in enumerate(self.benchmark.train_stream):
                 if i >= 3:
                     cl_strategy.train(exp, num_workers=4)
-                    self.results = cl_strategy.eval(benchmark.test_stream[:i + 1], num_workers=4)
+                    self.results = cl_strategy.eval(self.benchmark.test_stream[:i + 1], num_workers=4)
             self.first_done = None
             self.status_exp = 'CLtr_done'
         else: #None
