@@ -1,13 +1,13 @@
+from flakon import JsonBlueprint
 from flask import Flask, request
 import json
 import avalanche
 
-
-app = Flask(__name__)
+skeleton_v1 = JsonBlueprint('skeleton_v1', __name__)
 
 
 "Simple API to check if all ok with Flask microservices in deploy"
-@app.route("/", methods=['GET'])
+@skeleton_v1.route("/", methods=['GET'])
 def test_hello():
     resp = json.dumps({'dataset': 'D1', 'tr_setup': 'set1', 'results': 1})
     
@@ -15,7 +15,7 @@ def test_hello():
 
 
 "This is a simple API to test if avalanche is installed correctly."
-@app.route("/avalanche", methods=['GET'])
+@skeleton_v1.route("/avalanche", methods=['GET'])
 def test_api_avalanche():
     avalanche_info = test_avalanche_setup()
     resp = json.dumps({"avalanche_info": avalanche_info})
@@ -32,6 +32,3 @@ def test_avalanche_setup():
 
     return avalanche.__version__
 
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="80", debug=True)
