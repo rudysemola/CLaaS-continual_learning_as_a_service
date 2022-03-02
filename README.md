@@ -1,10 +1,12 @@
 # CLaaS-avalanche
-Continual Learning (CL) as a Service system DEMO mainly based on (CL) and Avalanche.
+Continual-Learning-as-a-Service (CLaaS) is a platform to move towards real-time machine learning and continual learning 
+This is a CLaaS system DEMO mainly based on Continual Learning strategies and Avalanche tool.
 
+## Current Release 
 This is the version 1.0
 
 ## Directory structure
-This is the structure of your first version:
+This is the structure of current version:
 
 ```
 CLaaS-avalanche
