@@ -10,6 +10,11 @@ COPY . .
 RUN echo "conda activate avalanche-env" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 RUN pip install -r requirements.txt
+# Install mmfashion
+RUN git clone --recursive https://github.com/open-mmlab/mmfashion.git
+RUN cd mmfashion
+RUN python setup.py install
+RUN cd ..
 
 # Make port  available for links and/or publish
 EXPOSE 5001
