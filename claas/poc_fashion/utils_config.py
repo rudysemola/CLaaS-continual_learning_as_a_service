@@ -48,3 +48,6 @@ class Timer:
         elapsed_time = time.perf_counter() - self._start_time
         self._start_time = None
         self.time['tr_time_exp_'+str(i)] = round(elapsed_time, 1)
+
+
+__all__ = ["DatasetSetting", "TimerError"]

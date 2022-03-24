@@ -100,3 +100,5 @@ class DeepFashion(Dataset):
 
     def __len__(self):
         return len(self.img_list)
+
+__all__ = ["DeepFashion"]

@@ -1,7 +1,7 @@
 import torch.nn as nn
 import torch
-from mmfashion.models.backbones.vgg import Vgg
-from mmfashion.models.global_pool.global_pool import GlobalPooling
+from vgg import Vgg
+from global_pool import GlobalPooling
 
 
 class GlobalCatePredictorFashion(nn.Module):
@@ -54,3 +54,5 @@ class CatePredictor(nn.Module):
         nn.init.xavier_uniform_(self.linear_cate.weight)
         if self.linear_cate.bias is not None:
             self.linear_cate.bias.data.fill_(0.01)
+
+__all__ = ["GlobalCatePredictorFashion", "CatePredictor"]
