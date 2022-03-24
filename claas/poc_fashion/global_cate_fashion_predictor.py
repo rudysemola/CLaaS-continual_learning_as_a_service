@@ -1,7 +1,8 @@
 import torch.nn as nn
 import torch
-from vgg import Vgg
-from global_pool import GlobalPooling
+
+from .vgg import Vgg
+from .global_pool import GlobalPooling
 
 
 class GlobalCatePredictorFashion(nn.Module):
