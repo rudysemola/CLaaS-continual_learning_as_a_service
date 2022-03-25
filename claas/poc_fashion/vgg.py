@@ -1,5 +1,5 @@
 import torch.nn as nn
-from mmcv.runner import load_checkpoint
+#from mmcv.runner import load_checkpoint
 
 
 class Vgg(nn.Module):
@@ -50,7 +50,8 @@ class Vgg(nn.Module):
     def init_weights(self, pretrained=None):
         print('pretrained model', pretrained)
         if isinstance(pretrained, str):
-            load_checkpoint(self, pretrained)
+            #load_checkpoint(self, pretrained)
+            pass
         elif pretrained is None:
             for m in self.modules():
                 if isinstance(m, nn.Conv2d):

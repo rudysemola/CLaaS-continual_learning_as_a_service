@@ -27,6 +27,7 @@ class ExperimentFashionScenario:
         """
             :param ...
         """
+        self.status_exp = 'ready_to_setup'
 
 
     def set_experiment(self, username, exp_name):

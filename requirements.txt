@@ -37,5 +37,5 @@ toml==0.10.2
 tomli==1.2.1
 urllib3==1.26.7
 Werkzeug==2.0.2
-mmcv
+Pillow
 torchmetrics
