@@ -17,8 +17,8 @@ API - CLaaS (Fashion Scenario)
 """
 #TODO
 
-@fashion_scenario.route("/fashion-scenario/test/", methods=['POST'])
-def setup_experiment():
+@fashion_scenario.route("/fashion-scenario/test-poc/", methods=['POST'])
+def test_poc():
     global EXPERIMENT
     body_json = request.get_json()
     username = body_json["username"]
