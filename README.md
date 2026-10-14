@@ -36,8 +36,4 @@ CLaaS-avalanche
    
 ```
 
-## Setup the environment
-Here...
-
-## Run the application
-Here...
+Architecture and advanced solution on ContinualIST page
